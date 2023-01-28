@@ -1,0 +1,20 @@
+- Make a new experiment directory, and copy the config/parameters files there.
+    - Tunable hyperparameters are precision/recall decision thresholds, optimizer momentum, learning rate, decay rate.
+- Load the data, then split to 90, 10, using iter stratification. Save the split index to the directory.
+    - http://scikit.ml/stratification.html
+- Split the 90 to 5 folds, using iter stratification. Save the 5 folds to the directory.
+    - http://scikit.ml/api/skmultilearn.model_selection.iterative_stratification.html
+    - Work with indices just so we can use SubsetRandomSampler.
+        - https://pytorch.org/docs/master/data.html#torch.utils.data.SubsetRandomSampler
+- Use ax-platform, so for each trial (should be a bit more than 500*4/30 = 80): 
+    - Make a new trial directory
+    - For each fold, 
+        - train the model using the parameters.
+        - test the model and compute the AUROC
+            - https://www.w3schools.com/python/python_ml_auc_roc.asp
+            - Alternatively, https://pytorch.org/ignite/generated/ignite.contrib.metrics.ROC_AUC.html
+    - Save list of AUROC, and mean AUROC.
+    - Save model. Save ax-platform trial data.
+    - Return mean AUROC to ax-platform.
+- Pick the best model using Ax-Platform.
+- Compute the confidence interval for the AUROC on the test indices.
