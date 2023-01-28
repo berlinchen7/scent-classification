@@ -1,0 +1,6 @@
+tqdm
+pandas
+vendi_score
+rdkit
+pyrfume
+sklearn

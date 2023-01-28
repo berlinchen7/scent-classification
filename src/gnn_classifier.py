@@ -58,7 +58,7 @@ def main():
     dataset = LeffingwellGoodscentsDataset(verbose=False)
     print(f"Finish preparing the database; it takes {time.time() - start_dataset_loading} seconds")
     
-    proportions = [.2, .8]
+    proportions = [.8, .2]
     lengths = [int(p * len(dataset)) for p in proportions]
     lengths[-1] = len(dataset) - sum(lengths[:-1])
     train_data, valid_data = random_split(dataset, lengths)

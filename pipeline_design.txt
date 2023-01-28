@@ -6,7 +6,7 @@
     - http://scikit.ml/api/skmultilearn.model_selection.iterative_stratification.html
     - Work with indices just so we can use SubsetRandomSampler.
         - https://pytorch.org/docs/master/data.html#torch.utils.data.SubsetRandomSampler
-- Use ax-platform, so for each trial (should be a bit more than 500*4/30 = 80): 
+- Use ax-platform, so for each trial (should be a bit more than 500*4/30, so maybe 80): 
     - Make a new trial directory
     - For each fold, 
         - train the model using the parameters.
