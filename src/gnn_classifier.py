@@ -49,7 +49,7 @@ class GNNScentClassifier(nn.Module):
 
 def main():
     # Load vendi weights:
-    with open('vendi_cache.npy', 'rb') as f:
+    with open('src/vendi_cache.npy', 'rb') as f:
         vendi_weights = np.load(f)
         vendi_weights = torch.tensor(vendi_weights)
 

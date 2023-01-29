@@ -83,7 +83,7 @@ class GoodscentsDataset(Dataset):
         self.inputs = [smiles.from_smiles(smiles_str) for smiles_str in smiles_final]
 
         self.odor_labels = odor_tags_final
-        self.labels = self.load_odor_labels_as_onehot(self.odor_labels, scentClasses_path='scentClasses_combined.csv')
+        self.labels = self.load_odor_labels_as_onehot(self.odor_labels, scentClasses_path='src/scentClasses_combined.csv')
 
     def __len__(self):
         return len(self.labels)
@@ -124,7 +124,7 @@ class LeffingwellDataset(Dataset):
 
         self.odor_labels = list(df_leffingwell['odor_labels_filtered'])
         self.odor_labels = [eval(odor_label) for odor_label in self.odor_labels]
-        self.labels = self.load_odor_labels_as_onehot(self.odor_labels, scentClasses_path='scentClasses_combined.csv')
+        self.labels = self.load_odor_labels_as_onehot(self.odor_labels, scentClasses_path='src/scentClasses_combined.csv')
 
     def __len__(self):
         return len(self.labels)
@@ -173,6 +173,9 @@ class LeffingwellGoodscentsDataset(Dataset):
         self.labels = self.leffingwell.labels + self.goodscents.labels
 
         self.odor_labels, self.inputs, self.labels = self.combine_duplicates(self.odor_labels, self.inputs, self.labels)
+
+        if self.verbose:
+            print(f"There are {len(self.labels)} in this dataset.")
 
     def __len__(self):
         return len(self.labels)
